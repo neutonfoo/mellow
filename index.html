@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+	<script type="text/javascript">
+		var currentR = getRandomInt(1, 254);
+		var rInterval = 1;
+
+		var currentG = getRandomInt(1, 254);
+		var gInterval = 1;
+
+		var currentB = getRandomInt(1, 254);
+		var bInterval = 1;
+
+		$(document).ready(function() {
+			$body = $('body');
+			$color = $('p')
+			updateBackgroundColor()
+
+			setInterval(function() {
+				updateBackgroundColor();
+			}, 50);
+		});
+
+		function updateBackgroundColor() {
+			if(currentR <= 0 || currentR >= 255) {
+				rInterval *= -1;
+			}
+
+			if(currentG <= 0 || currentG >= 255) {
+				gInterval *= -1;
+			}
+
+			if(currentB <= 0 || currentB >= 255) {
+				bInterval *= -1;
+			}
+
+			currentR += rInterval;
+			currentG += gInterval;
+			currentB += bInterval;
+
+			var color = 'rgb(' + currentR + ', ' + currentG + ', ' + currentB + ')';
+			var inverseColor = 'rgb(' + (255 - currentR) + ', ' + (255 - currentG) + ', ' + (255 - currentB) + ')';
+
+			$color.html(rgbToHex(currentR, currentG, currentB));
+			$color.css('color', inverseColor);
+
+			$body.css('background-color', color);			
+		}
+
+		function getRandomInt(min, max) {
+			min = Math.ceil(min);
+			max = Math.floor(max);
+			return Math.floor(Math.random() * (max - min)) + min;
+		}
+
+		function rgbToHex(r, g, b) {
+			return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+		}
+	</script>
+	<style type="text/css">
+		p {
+			text-align: center;
+			vertical-align: middle;
+		}
+	</style>
+</head>
+<body>
+	<p></p>
+</body>
+</html>
