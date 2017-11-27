@@ -27,7 +27,7 @@ $(document).ready(function() {
 		$.each(particles, function( i, particle ) {
 			// Update particles
 			$canvas.drawEllipse({
-			  fillStyle: '#c33',
+			  fillStyle: '#000',
 			  x: particle.x, y: particle.y,
 			  width: 3, height: 3
 			});
@@ -35,8 +35,8 @@ $(document).ready(function() {
 			$.each(particles, function( j, otherParticle ) {
 				var distance = distanceFromPoints(particle.x, particle.y, otherParticle.x, otherParticle.y);
 
-				if(distance < 100) {
-					var shade = Math.floor(distance);
+				if(distance < 150) {
+					var shade = Math.floor(255 * distance / 150);
 					var strokeColor = "rgb("+ shade + ", " + shade + ", " + shade + ")";
 					$canvas.drawLine({
 						strokeStyle: strokeColor,
@@ -77,7 +77,7 @@ $(document).ready(function() {
 				}
 			}
 		});
-	}, 50);
+	}, 40);
 });
 
 function randomIntFromInterval(min, max) {
